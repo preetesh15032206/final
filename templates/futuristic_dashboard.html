@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HorizonFlow - Traffic Command Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="command-center-container">
+        <header class="header-panel">
+            <h1>HorizonFlow: Traffic Command Center</h1>
+            <div class="header-controls">
+                <span id="system-status" class="status-indicator online">System Online</span>
+                <button class="control-button" onclick="resetSystem()">Reset System</button>
+                <label class="switch">
+                    <input type="checkbox" id="auto-mode-toggle" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="auto-mode-label">Auto Mode</span>
+            </div>
+        </header>
+
+        <div class="main-grid">
+            <div class="video-panel">
+                <h2>Live Feeds</h2>
+                <div class="video-grid">
+                    <div class="video-box" data-lane-id="lane_1">
+                        <img src="/multi_lane_feed/lane_1" alt="Main Street Video" class="live-feed">
+                        <div class="overlay">
+                            <span class="lane-name">Main St</span>
+                            <span class="signal-status">GREEN</span>
+                        </div>
+                    </div>
+                    <div class="video-box" data-lane-id="lane_2">
+                        <img src="/multi_lane_feed/lane_2" alt="Oak Street Video" class="live-feed">
+                        <div class="overlay">
+                            <span class="lane-name">Oak St</span>
+                            <span class="signal-status">RED</span>
+                        </div>
+                    </div>
+                    <div class="video-box" data-lane-id="lane_3">
+                        <img src="/multi_lane_feed/lane_3" alt="Park Ave Video" class="live-feed">
+                        <div class="overlay">
+                            <span class="lane-name">Park Ave</span>
+                            <span class="signal-status">RED</span>
+                        </div>
+                    </div>
+                    <div class="video-box" data-lane-id="lane_4">
+                        <img src="/multi_lane_feed/lane_4" alt="River Rd Video" class="live-feed">
+                        <div class="overlay">
+                            <span class="lane-name">River Rd</span>
+                            <span class="signal-status">RED</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analytics-panel">
+                <h2>System Analytics</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-value" id="total-intersections">4</span>
+                        <span class="stat-label">Total Intersections</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value" id="total-vehicles">0</span>
+                        <span class="stat-label">Total Vehicles</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value" id="total-events">0</span>
+                        <span class="stat-label">Total Events</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value" id="avg-compliance">0%</span>
+                        <span class="stat-label">Avg Compliance</span>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="vehicle-count-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="events-panel">
+                <h2>Recent Activity</h2>
+                <ul id="event-log"></ul>
+            </div>
+
+            <div class="controls-panel">
+                <h2>Manual Controls</h2>
+                <div class="manual-controls-grid">
+                    <div class="lane-control">
+                        <span class="lane-label">Main St</span>
+                        <button class="manual-button" data-lane="lane_1" data-signal="GREEN">GREEN</button>
+                        <button class="manual-button" data-lane="lane_1" data-signal="RED">RED</button>
+                    </div>
+                    <div class="lane-control">
+                        <span class="lane-label">Oak St</span>
+                        <button class="manual-button" data-lane="lane_2" data-signal="GREEN">GREEN</button>
+                        <button class="manual-button" data-lane="lane_2" data-signal="RED">RED</button>
+                    </div>
+                    <div class="lane-control">
+                        <span class="lane-label">Park Ave</span>
+                        <button class="manual-button" data-lane="lane_3" data-signal="GREEN">GREEN</button>
+                        <button class="manual-button" data-lane="lane_3" data-signal="RED">RED</button>
+                    </div>
+                    <div class="lane-control">
+                        <span class="lane-label">River Rd</span>
+                        <button class="manual-button" data-lane="lane_4" data-signal="GREEN">GREEN</button>
+                        <button class="manual-button" data-lane="lane_4" data-signal="RED">RED</button>
+                    </div>
+                </div>
+                <button id="emergency-stop-button">EMERGENCY STOP</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+language: python
+run: python app.py
+modules: ["python-3.11"]
+hidden: [".pythonlibs"]
+
+[deployment]
+run = ["python", "app.py"]
+deployment_target = "autoscale"
+
+[deployment.environment]
+PYTHONPATH = "."
+
+[nix]
+channel = "stable-22_11"
+
+[env]
+VIRTUAL_ENV = "/home/runner/${REPL_SLUG}/.pythonlibs"
+PATH = "${VIRTUAL_ENV}/bin"
+PYTHONPATH = "$PYTHONPATH:${VIRTUAL_ENV}/lib/python3.11/site-packages"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
